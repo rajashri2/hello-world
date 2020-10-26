@@ -11,3 +11,6 @@ Rajan Patil, Aundh, 22, USB Cable, Rs 150, UPI
 Meena Kothari, Baner, 23, USB Cable, Rs 100, Cash
 Nina Kothari, Baner, 24, USB Cable, Rs 200, UPI
 Mohit Gupta, Baner, 25, USB Cable, Rs 150, UPI
+
+
+The first column is customer name, the second column is store location, the third column is date (just day of the month is captured), the fourth column is product name, fifth is price, and sixth is payment type.
