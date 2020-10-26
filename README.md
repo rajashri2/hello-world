@@ -14,3 +14,12 @@ Mohit Gupta, Baner, 25, USB Cable, Rs 150, UPI
 
 
 The first column is customer name, the second column is store location, the third column is date (just day of the month is captured), the fourth column is product name, fifth is price, and sixth is payment type.
+
+
+var result = data.GroupBy(l => l.Player)
+             .Select(cl => new Foo()
+             {
+                Index = string.Join(", ", data.Where(d => d.Player == cl.Key).Select(d => d.Index).ToArray()),
+                Player = cl.Key,
+                Score = cl.Sum(c => c.Score)
+             }).ToList();
