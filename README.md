@@ -1,13 +1,13 @@
-static void f1(S s) {
-    s.i += 1;
+static void f1(ref String s1, out String s2) {
+    s1 += "0";
+    s2 = "45";
 }
 static String f2() {
-    S s;
-    s.i = 42;
-    f1(s);
-    return s.i.ToString();
+    String s1 = "42", s2;
+    f1(ref s1, out s2);
+    return s1 + s2;
 }
 
-struct S {
-    public int i;
+class S {
+    public int I;
 }
