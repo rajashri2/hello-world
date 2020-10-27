@@ -23,3 +23,34 @@ var result = data.GroupBy(l => l.Player)
                 Player = cl.Key,
                 Score = cl.Sum(c => c.Score)
              }).ToList();
+
+    public static List<String> processData(IEnumerable<string> lines)
+        {
+            List<ProductModel> productlist = new List<ProductModel>();
+            ProductModel objProduct = new ProductModel();
+            foreach (var item in lines)
+            {
+                string[] split = item.Split(',');
+                objProduct.CustomerName = split[0];
+                //  objProduct.StoreLocation = split[1];
+                //   objProduct.Day = Convert.ToInt16(split[2]);
+                objProduct.ProductName = split[3];
+                objProduct.Price = Convert.ToInt16(split[4].Replace("Rs", string.Empty));
+                //  objProduct.PaymentType = split[5];
+                productlist.Add(objProduct);
+                objProduct = new ProductModel();
+            }
+            var results = productlist
+                .GroupBy(x => new { objProduct.ProductName, objProduct.Price}).ToList();
+
+            foreach (var item in results)
+            {
+                foreach (var user in item)
+                {
+                    int price = user.Price;
+                }
+            }
+
+            List<String> retVal = new List<String>();
+            return retVal;
+        }
