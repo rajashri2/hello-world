@@ -1,3 +1,4 @@
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -12,24 +13,38 @@ namespace ProgramNamespace
 {
     /* You may add helper classes here if necessary */
 
+    public class ProductModel
+    {
+        public string CustomerName { get; set; }
+        public string StoreLocation { get; set; }
+        public int Day { get; set; }
+        public string ProductName { get; set; }
+        public int Price { get; set; }
+        public string PaymentType { get; set; }
+    }
+
+
     public class Program
     {
-        public static List<String> processData(
-                                        IEnumerable<string> lines)
+        public static List<String> processData(IEnumerable<string> lines)
         {
-            /* 
-             * Do not make any changes outside this method.
-             *
-             * Modify this method to process `array` as indicated
-             * in the question. At the end, return a List containing
-             * the appropriate values
-             *
-             * Do not print anything in this method
-             *
-             * Submit this entire program (not just this function)
-             * as your answer
-             */
+            List<ProductModel> ListOFProducts = new List<ProductModel>();
+            ProductModel objProduct = new ProductModel();
+            foreach (var item in lines)
+            {
+                string[] split = item.Split(',');
+                objProduct.CustomerName = split[0];
+                objProduct.StoreLocation = split[1];
+                objProduct.Day = Convert.ToInt16(split[2]);
+                objProduct.ProductName = split[3];
+                objProduct.Price = Convert.ToInt16(split[4].Replace("Rs", string.Empty));
+                objProduct.PaymentType = split[5];
+                ListOFProducts.Add(objProduct);
+                objProduct = new ProductModel();
+            }
             List<String> retVal = new List<String>();
+            List<ProductModel> listOfMaxPriceCustomer = ListOFProducts.OrderByDescending(o => o.Price).GroupBy(o => o.ProductName).Select(o => o.First()).ToList();
+            retVal = ListOFProducts.Select(x => x.CustomerName).Except(listOfMaxPriceCustomer.Select(x => x.CustomerName)).ToList();
             return retVal;
         }
 
@@ -39,14 +54,15 @@ namespace ProgramNamespace
             {
                 String line;
                 var inputLines = new List<String>();
-                while((line = Console.ReadLine()) != null) {
-                  line = line.Trim();
-                  if (line != "")
-                    inputLines.Add(line);
+                while ((line = Console.ReadLine()) != null)
+                {
+                    line = line.Trim();
+                    if (line != "")
+                        inputLines.Add(line);
                 }
                 var retVal = processData(inputLines);
-                foreach(var res in retVal)
-                  Console.WriteLine(res);
+                foreach (var res in retVal)
+                    Console.WriteLine(res);
             }
             catch (IOException ex)
             {
