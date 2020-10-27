@@ -20,3 +20,6 @@ routes.MapRoute(
         id = UrlParameter.Optional
     }
 );
+
+
+/Hospital/Doctor/p32
