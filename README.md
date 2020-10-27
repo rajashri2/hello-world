@@ -1,13 +1,22 @@
-static void f1(out String s1, ref String s2) {
-    s1 += "0";
-    s2 += "0";
-}
-static String f2() {
-    String s1 = "42", s2 = "43";
-    f1(out s1, ref s2);
-    return s1 + s2;
-}
+routes.MapRoute(
+    name: "MyRoute",
+    url: "Hospital/Doctor/{patientId}",
+    defaults: new
+    {
+        controller = "HospitalHandler",
+        action = "ProcessPatient",
+        patientId = UrlParameter.Optional
+    },
+    new {id = @"\d+"}
+);
 
-class S {
-    public int I;
-}
+routes.MapRoute(
+    name: "Default",
+    url: "{controller}/{action}/{id}",
+    defaults: new
+    {
+        controller = "Home",
+        action = "Index",
+        id = UrlParameter.Optional
+    }
+);
